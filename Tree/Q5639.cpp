@@ -41,7 +41,6 @@ void search_postorder(int start,int end){
         }
     }
 
-    // 1) curRoot is bigger than all other nodes
     if(lessCount == 0 || biggerCount == 0)
         search_postorder(start+1,end);
     else{
