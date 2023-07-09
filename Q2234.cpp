@@ -8,6 +8,7 @@ using namespace std;
 int N, M;
 int room_num = 0;
 int room_largest = 0;
+int room_combined = 0;
 
 vector<int> rooms;
 vector<vector<int>> visited(50, vector<int>(50, 0));
@@ -80,6 +81,29 @@ int bfs_search(int r,int c) {
     return area;
 }
 
+int combine() {
+
+    int max_combined = 0;
+
+    for (int i = 0; i < M; i++)
+        for (int j = 0; j < N; j++)
+            for (int k = 0; k < 4; k++)
+            {
+                int nr = i + dir[k][0];
+                int nc = j + dir[k][1];
+
+                if (nr >= 0 && nr < M && nc >= 0 && nc < N)
+                {
+                    if (visited[i][j] != visited[nr][nc])
+                        if (max_combined < rooms[visited[i][j] - 1] + rooms[visited[nr][nc] - 1])
+                            max_combined = rooms[visited[i][j] - 1] + rooms[visited[nr][nc] - 1];
+
+                }
+
+            }
+
+    return max_combined;
+}
 
 
 int main()
@@ -100,10 +124,11 @@ int main()
                     room_largest = rooms.back();
             }
 
+    room_combined = combine();
 
     cout << room_num << endl;
     cout << room_largest << endl;
-    
+    cout << room_combined << endl;
 
 }
 
