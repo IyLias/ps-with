@@ -12,13 +12,13 @@ vector<int> search_idx;
 
 vector<int> create_table(string p) {
 	// table은 i번째 인덱스까지에서 접두와 접미가 일치하는 최대 길이 값을 저장
-	vector<int> table(p.length(),0);
-	
+	vector<int> table(p.length(), 0);
+
 	int j = 0;
 	for (int i = 1; i < p.length(); i++)
 	{
 		while ((j > 0) && (p[i] != p[j]))
-			j = table[j-1];
+			j = table[j - 1];
 
 		if (p[i] == p[j]) {
 			table[i] = j + 1;
@@ -30,29 +30,25 @@ vector<int> create_table(string p) {
 }
 
 
-int kmp(string s, string p, vector<int> &table) {
+void kmp(string s, string p, vector<int>& table) {
 
 	int j = 0;
 	for (int i = 0; i < s.length(); i++)
 	{
 		while ((j > 0) && (s[i] != p[j]))
 			j = table[j - 1];
-		
+
 		if (s[i] == p[j])
 			if (j == p.length() - 1)
 			{
-				return 1;
+				search_idx.push_back(i - j + 1);
+				j = table[j];
 			}
 			else
 				j++;
 	}
 
-	return 0;
 }
-
-
-
-
 
 int main()
 {
@@ -64,8 +60,10 @@ int main()
 
 	kmp(S, P, table);
 
+	printf("%d\n", search_idx.size());
+	for (int i = 0; i < search_idx.size(); i++)
+		printf("%d ", search_idx[i]);
 
 	return 0;
 
 }
-
