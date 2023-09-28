@@ -49,6 +49,9 @@ ull powmod(ull x, ull y, ull m) {
 }
 
 inline bool miller_rabin(ull n, ull a) {
+	// 이 한 줄이 없으면 틀렸다고 뜬다.. 자세히 알아봐야할 듯 
+	if (a % n == 0) return true;
+
 	ull d = n - 1;
 	while (d % 2 == 0) {
 		if (powmod(a, d, n) == n - 1)
