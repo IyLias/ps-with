@@ -23,6 +23,12 @@
 
 <br>
 
+* 3SAT
+
+   * https://www.acmicpc.net/problem/16992
+
+<br>
+
 * Min Cut - Maximum flow
 
   references
