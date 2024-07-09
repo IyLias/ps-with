@@ -29,9 +29,8 @@ int main(){
        max_profit[i] = P[i];
     
     for(int k=1;k<i;k++){
-       if(k+T[k]-1<=i){
-	  if(T[k] == 1)
-	     max_profit[i] = max(max_profit[i], max_profit[k]);
+       if(k+T[k]<=i){
+	  max_profit[i] = max(max_profit[i], max_profit[k]);
 
 	  if(i+T[i]-1 <= N)
 	     max_profit[i] = max(max_profit[i], max_profit[k] + P[i]);
@@ -40,11 +39,10 @@ int main(){
 
  } 
 
- 
- cout << max_profit[N] << endl;
+ int result = 0;
  for(int i=1;i<=N;i++)
-    cout << max_profit[i] << " ";
- cout << endl;
+    result = max(result, max_profit[i]);
+ cout << result << endl;
 
  return 0;
 }
